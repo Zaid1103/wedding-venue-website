@@ -1,0 +1,63 @@
+/* Reset default margin and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Style for the form container */
+  .form {
+    max-width: 800px; /* Adjust as needed */
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+  }
+  
+  /* Style for form elements */
+  .form label {
+    font-size: 16px;
+    margin-bottom: 10px; /* Adjust as needed */
+    display: flex;
+    align-items: center;
+    margin-left: 30px;
+    margin-right: auto;
+  }
+  
+  .form label > span {
+    width: 35%; /* Adjust width as needed */
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .form input[type="number"],
+  .form select,
+  .form input[type="date"] {
+    width: 400px; /* Adjust width as needed */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 0 auto; /* Center the input field */
+  }
+  
+  /* Style for submit button */
+  .form button {
+    width: 15%;
+    padding: 10px;
+    background-color: #f9f9f9;
+    color: black;
+    border: 3px solid transparent;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.2s;
+    font-size: 18px;
+    margin-left: auto; /* Center the submit button */
+    margin-right: auto; /* Center the submit button */
+    margin-left: 40%;
+  }
+  
+  .form button:hover {
+    border-bottom-color: black;
+  }
+  

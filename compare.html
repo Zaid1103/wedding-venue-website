@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elegance weddings</title>
+    <link rel="stylesheet" href="general.css">
+    <link rel="stylesheet" href="navbar.css">
+    <link rel="stylesheet" href="compare-page.css">
+    <link rel="stylesheet" href="venues-form.css">
+    <link rel="stylesheet" href="home-page.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script defer src="hpanimations.js"></script>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        
+        h2.graph-title {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+<header>
+    <div class="logo">Elegance weddings</div>
+    <input type="checkbox" id="nav_check" hidden>
+    <nav>
+        <ul>
+            <li>
+                <a href="wedding.php" >Home</a>
+            </li>
+            <li>
+                <a href="venues.html">Our Venues</a>
+            </li>
+            <li>
+                <a href="catering.html">Catering</a>
+            </li>
+            <li>
+                <a href="compare.php">Compare</a>
+            </li>
+            <li>
+                <a href="booking.html">Booking</a>
+            </li>
+        </ul>
+    </nav>
+    <label for="nav_check" class="hamburger">
+        <div></div>
+        <div></div>
+        <div></div>
+    </label>
+</header>
+<h1>Welcome to our compare page</h1>
+<h2>Here you can compare the facilities, prices and other statistics of our venues, enhanced through visual aids
+<div class="hidden">
+    <div class="form" id="venue">
+        <form id="myForm">
+            <div>
+                <label for="venuename1">
+                    <span>Choose first venue:</span>
+                    <select id="venuename1" name="venuename1">
+                        <option value="">--Please choose an option--</option>
+                        <option value="Central Plaza">Central Plaza</option>
+                        <option value="Pacific Towers Hotel">Pacific Towers Hotel</option>
+                        <option value="Sky Center Complex">Sky Center Complex</option>
+                        <option value="Sea View Tavern">Sea View Tavern</option>
+                        <option value="Ashby Castle">Ashby Castle</option>
+                        <option value="Fawlty Towers">Fawlty Towers</option>
+                        <option value="Hilltop Mansion">Hilltop Mansion</option>
+                        <option value="Haslegrave Hotel">Haslegrave Hotel</option>
+                        <option value="Forest Inn">Forest Inn</option>
+                        <option value="Southwestern Estate">Southwestern Estate</option>
+                    </select>
+                </label>
+            </div>
+
+            <div>
+                <label for="venuename2">
+                    <span>Choose second venue:</span>
+                    <select id="venuename2" name="venuename2">
+                        <option value="">--Please choose an option--</option>
+                        <option value="Central Plaza">Central Plaza</option>
+                        <option value="Pacific Towers Hotel">Pacific Towers Hotel</option>
+                        <option value="Sky Center Complex">Sky Center Complex</option>
+                        <option value="Sea View Tavern">Sea View Tavern</option>
+                        <option value="Ashby Castle">Ashby Castle</option>
+                        <option value="Fawlty Towers">Fawlty Towers</option>
+                        <option value="Hilltop Mansion">Hilltop Mansion</option>
+                        <option value="Haslegrave Hotel">Haslegrave Hotel</option>
+                        <option value="Forest Inn">Forest Inn</option>
+                        <option value="Southwestern Estate">Southwestern Estate</option>
+                    </select>
+                </label>
+            </div>
+
+            <button type="submit">Compare</button>
+        </form>
+    </div>
+</div>
+
+<div id="capacityComparison">
+    <h2 class="graph-title">Capacity Comparison</h2>
+    <canvas id="capacityChart" width="400" height="200"></canvas>
+</div>
+<div id="priceComparison">
+    <h2 class="graph-title">Weekend/Weekday Price Comparison</h2>
+    <canvas id="priceChart" width="400" height="200"></canvas>
+</div>
+<div id="cateringComparison">
+    <h2 class="graph-title">Catering grades available and their price Comparison</h2>
+    <canvas id="cateringChart" width="400" height="200"></canvas>
+</div>
+<div id="reviewComparison">
+    <h2 class="graph-title">Review Score Comparison</h2>
+    <canvas id="reviewChart" width="400" height="200"></canvas>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const form = document.getElementById("myForm");
+        const capacityComparison = document.getElementById("capacityComparison");
+        const priceComparison = document.getElementById("priceComparison");
+        const cateringComparison = document.getElementById("cateringComparison");
+        const reviewComparison = document.getElementById("reviewComparison");
+
+        form.addEventListener("submit", function(event) {
+            event.preventDefault();
+            const formData = new FormData(form);
+            fetch('compare.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.length === 0) {
+                    console.log('No data found');
+                    return;
+                }
+
+                let venues = [];
+                let capacities = {};
+                let weekendPrices = {};
+                let weekdayPrices = {};
+                let cateringGrades = [];
+                let cateringPrices = [];
+                let reviewScores = {};
+
+                data.forEach(entry => {
+                    let venue = entry.venue_name;
+                    if (!venues.includes(venue)) {
+                        venues.push(venue);
+                    }
+                    capacities[venue] = entry.capacity;
+                    weekendPrices[venue] = entry.max_weekend_price;
+                    weekdayPrices[venue] = entry.max_weekday_price;
+                    if (entry.catering_grade !== null && !cateringGrades.includes(entry.catering_grade)) {
+                        cateringGrades.push(entry.catering_grade);
+                    }
+                    cateringPrices.push(entry.avg_catering_price);
+                    reviewScores[venue] = entry.average_review_score;
+                });
+
+                // Update chart data and venue information
+                updateChart('capacityChart', venues, Object.values(capacities), 'Capacity Comparison');
+                updateDoubleBarChart('priceChart', venues, Object.values(weekendPrices), Object.values(weekdayPrices), 'Weekend and Weekday Prices', ['Weekend Price', 'Weekday Price']);
+                updateCateringChart('cateringChart', venues, cateringGrades, cateringPrices, data);
+                updateReviewChart('reviewChart', venues, Object.values(reviewScores));
+
+                // Show the h2 elements after the charts are updated
+                document.querySelectorAll('.graph-title').forEach(title => {
+                    title.style.display = 'block';
+                });
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    });
+
+    // Function to update a bar chart
+    function updateChart(chartId, labels, data, chartTitle) {
+        const ctx = document.getElementById(chartId).getContext('2d');
+        
+        // Check if a chart instance already exists for the canvas
+        let existingChart = Chart.getChart(ctx);
+        if (existingChart) {
+            existingChart.destroy(); // Destroy the existing chart
+        }
+        
+        const myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: chartTitle,
+                    data: data,
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    }
+
+    // Function to update a double bar chart
+    function updateDoubleBarChart(chartId, labels, data1, data2, chartTitle, datasetLabels) {
+        const ctx = document.getElementById(chartId).getContext('2d');
+        let existingChart = Chart.getChart(ctx);
+        if (existingChart) {
+            existingChart.destroy(); // Destroy the existing chart
+        }
+        
+        const myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: datasetLabels[0],
+                    data: data1,
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                },
+                {
+                    label: datasetLabels[1],
+                    data: data2,
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    }
+
+    // Function to update a catering chart
+    function updateCateringChart(chartId, labels, cateringGrades, cateringPrices, data) {
+        const ctx = document.getElementById(chartId).getContext('2d');
+        let existingChart = Chart.getChart(ctx);
+        if (existingChart) {
+            existingChart.destroy(); // Destroy the existing chart
+        }
+        
+        const datasets = [];
+        for (let i = 0; i < cateringGrades.length; i++) {
+            const backgroundColor = getRandomColor();
+            const dataset = {
+                label: cateringGrades[i],
+                data: [],
+                backgroundColor: backgroundColor,
+                borderColor: backgroundColor,
+                borderWidth: 1
+            };
+            for (let j = 0; j < labels.length; j++) {
+                const index = data.findIndex(item => item.venue_name === labels[j] && item.catering_grade === cateringGrades[i]);
+                if (index !== -1) {
+                    dataset.data.push(data[index].avg_catering_price);
+                } else {
+                    dataset.data.push(0);
+                }
+            }
+            datasets.push(dataset);
+        }
+        const myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: datasets
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    }
+
+    // Function to update a review chart
+    function updateReviewChart(chartId, labels, reviewScores) {
+        const ctx = document.getElementById(chartId).getContext('2d');
+        let existingChart = Chart.getChart(ctx);
+        if (existingChart) {
+            existingChart.destroy(); // Destroy the existing chart
+        }
+        
+        const myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Average Review Score',
+                    data: reviewScores,
+                    backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)'],
+                    borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    }
+
+    // Function to generate random color
+    function getRandomColor() {
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+        for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="navbar.css">
+    <link rel="stylesheet" href="general.css">
+    <link rel="stylesheet" href="venues-slider.css">
+    <link rel="stylesheet" href="venues-form.css">
+    <script src="venues-slider.js"></script>
+    <style>
+      table {
+          width: 100%;
+          border-collapse: collapse;
+      }
+
+      th, td {
+          padding: 8px;
+          text-align: left;
+          border-bottom: 1px solid #ddd;
+      }
+
+      th {
+          background-color: #f2f2f2;
+      }
+
+      tr:hover {
+          background-color: #f5f5f5;
+      }
+    </style>
+    <title>Elegance weddings</title>
+</head>
+<body>
+    <header>
+        <div class="logo">Elegance weddings</div>
+        <input type="checkbox" id="nav_check" hidden>
+        <nav>
+            <ul>
+                <li>
+                    <a href="wedding.php">Home</a>
+                </li>
+                <li>
+                    <a href="venues.html">Our Venues</a>
+                </li>
+                <li>
+                    <a href="catering.html">Catering</a>
+                </li>
+                <li>
+                    <a href="compare.html">Compare</a>
+                </li>
+                <li>
+                    <a href="booking.html">Booking</a>
+                </li>
+            </ul>
+        </nav>
+        <label for="nav_check" class="hamburger">
+            <div></div>
+            <div></div>
+            <div></div>
+        </label>
+    </header>
+    <h1 class="first">Explore our range of city based venues</h1>
+
+    <div class="main-container">
+        <div class="container">
+            <div class="slide">
+              <div class="item" style="background-image: url(https://i.ibb.co/vLq7TM9/centralplaza.jpg)">
+                  <div class="content">
+                      <div class="name">Central Plaza</div>
+                      <div class="des">Introducing Central Plaza: where timeless elegance meets modern luxury. Our venue, nestled in the heart
+                            of the city, offers unparalleled charm and versatility for your dream wedding. From grand ballrooms to charming outdoor
+                            terraces, Central Plaza provides the perfect backdrop for your special day. Conveniently located with easy access to
+                            transportation and accommodations, we ensure a seamless and unforgettable wedding experience. Discover the magic of
+                            Central Plaza and turn your wedding dreams into cherished memories.
+                        </div>
+                      <div>
+                        <button>
+                          <a href="compare.html">Compare</a>
+                        </button>
+                        <button>
+                          <a href="booking.html">Book</a>
+                        </button>
+                      </div>
+                  </div>
+              </div>
+              <div class="item" style="background-image: url(https://i.ibb.co/rQ6S8dS/pacifictowers.jpg)";>
+                  <div class="content">
+                      <div class="name">Pacific Towers Hotel</div>
+                      <div class="des">Introducing Pacific Towers Hotel: a captivating blend of urban sophistication and coastal charm. Nestled in
+                         the heart of the city with sweeping views of the Pacific Ocean, our venue offers a unique fusion of metropolitan flair and
+                          seaside allure for your wedding day. From elegant ballrooms to picturesque beachfront settings, Pacific Towers Hotel provides
+                           a range of luxurious indoor and outdoor spaces to suit your preferences. Conveniently situated near city attractions and 
+                           coastal amenities, your guests will enjoy the best of both worlds: city excitement and coastal serenity. Experience the
+                            dynamic ambiance and scenic beauty of Pacific Towers Hotel.</div>
+                      <div>
+                        <button>
+                          <a href="compare.html">Compare</a>
+                        </button>
+                        <button>
+                          <a href="booking.html">Book</a>
+                        </button>
+                      </div>
+                  </div>
+              </div>
+              <div class="item" style="background-image: url(https://i.ibb.co/zXfQsWN/skycentercomplex.jpg);">
+                  <div class="content">
+                      <div class="name">Sky Center Complex</div>
+                      <div class="des">Introducing Sky Center Complex: an urban oasis in the heart of the city. Perched high above the bustling streets,
+                         our venue offers stunning skyline views for your celebration. With modern architecture and chic spaces, it's the perfect city
+                          wedding destination. Conveniently located downtown, experience sophistication at Sky Center Complex, where urban elegance meets
+                           sky-high dreams.</div>
+                      <div>
+                      <button>
+                        <a href="compare.html">Compare</a>
+                      </button>
+                      <button>
+                        <a href="booking.html">Book</a>
+                      </button>
+                    </div>
+                  </div>
+              </div>
+              <div class="item" style="background-image: url(https://i.ibb.co/KXpnz86/fawltytowers.jpg);">
+                  <div class="content">
+                      <div class="name">Fawlty Towers</div>
+                      <div class="des">Welcome to Fawlty Towers, where rustic charm meets intimate elegance. Tucked away in a quaint setting, our venue 
+                        exudes coziness and warmth, making it ideal for intimate gatherings. With its rustic allure and charming atmosphere, 
+                        Fawlty Towers offers a unique and memorable wedding experience.</div>
+                  <div>
+                    <button>
+                      <a href="compare.html">Compare</a>
+                    </button>
+                    <button>
+                      <a href="booking.html">Book</a>
+                    </button>
+                  </div>
+                  </div>
+              </div>
+              <div class="item" style="background-image: url(https://i.ibb.co/xhWZ3Ry/haslegravehotel.jpg);">
+                  <div class="content">
+                      <div class="name">Haslegrave Hotel</div>
+                      <div class="des">Welcome to Haslegrave Hotel, where timeless sophistication meets modern luxury. Located in the heart of the city,
+                         our venue offers convenience and elegance for your special day. With its stylish décor and impeccable service, Haslegrave Hotel
+                          promises an unforgettable wedding experience.</div>
+                      <div>
+                        <button>
+                          <a href="compare.html">Compare</a>
+                        </button>
+                        <button>
+                          <a href="booking.html">Book</a>
+                        </button>
+                      </div>
+                  </div>
+              </div>
+            </div>
+            <div class="button">
+                <button class="prev">&#60;<i class="fa-solid fa-arrow-left"></i></button>
+                <button class="next">&#62;<i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+      
+          </div>
+    </div>
+    <h1 class="second">Explore our range of rural and coastal venues</h1>
+
+    <div class="main-container">
+        <div class="container">
+            <div class="slide">
+              <div class="item" style="background-image: url(https://i.ibb.co/tmFjP6d/forestinn.jpg);">
+                  <div class="content">
+                      <div class="name">Forest Inn</div>
+                      <div class="des">
+                        Nestled in the serene embrace of nature, Forest Inn offers a picturesque setting for your dream wedding. Surrounded by lush greenery,
+                         our venue provides a tranquil escape from the hustle and bustle of city life. With its rustic charm and natural beauty, Forest Inn creates 
+                         the perfect ambiance for a romantic celebration amidst the enchanting forest landscape.</div>
+                    <div>
+                    <button>
+                      <a href="compare.html">Compare</a>
+                    </button>
+                    <button>
+                      <a href="booking.html">Book</a>
+                    </button>
+                  </div>
+                  </div>
+              </div>
+              <div class="item" style="background-image: url(https://i.ibb.co/tJxPtxq/ashby-castle.jpg);">
+                  <div class="content">
+                      <div class="name">Ashby Castle</div>
+                      <div class="des">Nestled amidst sprawling lawns and manicured gardens, Ashby Castle stands as a grand testament to elegance and luxury.
+                         This expansive estate, renowned for its rich history and regal architecture, offers an enchanting backdrop for your special day. 
+                         As a large venue, Ashby Castle provides ample space and versatility, ensuring that your wedding celebration is nothing short of spectacular.</div>
+                      <div>
+                      <button>
+                        <a href="compare.html">Compare</a>
+                      </button>
+                      <button>
+                        <a href="booking.html">Book</a>
+                      </button>
+                    </div>
+                  </div>
+              </div>
+              <div class="item" style="background-image: url(https://i.ibb.co/YB65Nz3/southwesternestate.jpg);">
+                  <div class="content">
+                      <div class="name">Soutwestern Estate</div>
+                      <div class="des">Situated within the picturesque landscape, Southwestern Estate epitomizes sophistication and charm. This idyllic venue
+                         boasts stunning surroundings and modern amenities, including a refreshing pool, adding a touch of luxury to your wedding experience. 
+                         With its tranquil ambiance and elegant setting, Southwestern Estate promises to create unforgettable memories for you and your guests.</div>
+                      <div>
+                      <button>
+                        <a href="compare.html">Compare</a>
+                      </button>
+                      <button>
+                        <a href="booking.html">Book</a>
+                      </button>
+                    </div>
+                  </div>
+              </div>
+              <div class="item" style="background-image: url(https://i.ibb.co/80dgwPy/hilltopmansion.jpg);">
+                  <div class="content">
+                      <div class="name">Hilltop Mansion</div>
+                      <div class="des">Introducing Hilltop Mansion: where elegance meets enchantment. Perched atop rolling hills, our venue offers a breathtaking 
+                        backdrop for your special day. With its picturesque views and timeless charm, Hilltop Mansion sets the stage for an unforgettable wedding celebration.
+                         From intimate ceremonies in lush gardens to grand receptions in stately ballrooms, our versatile spaces cater to every style and preference.
+                          Experience the magic of Hilltop Mansion, where your wedding dreams come to life amidst the beauty of nature and the allure of historic grandeur.</div>
+                      <div>
+                        <button>
+                          <a href="compare.html">Compare</a>
+                        </button>
+                        <button>
+                          <a href="booking.html">Book</a>
+                        </button>
+                      </div>
+                  </div>
+              </div>
+              <div class="item" style="background-image: url(https://i.ibb.co/L1hDkd6/seaviewtavern.jpg);">
+                  <div class="content">
+                      <div class="name">Sea View Tavern</div>
+                      <div class="des">
+                        Introducing Sea View Tavern: a coastal gem for your wedding festivities. With its idyllic seaside location and rustic charm, Sea View Tavern offers a
+                         relaxed and intimate setting for your special day. Exchange vows with the sound of waves as your backdrop, followed by a celebration overlooking the 
+                         shimmering waters. Whether it's a beach ceremony or a cozy indoor reception, our venue provides the perfect ambiance for cherished memories. 
+                         Discover the enchantment of Sea View Tavern, where coastal beauty and warm hospitality await.</div>
+                      <div>
+                      <button>
+                        <a href="compare.html">Compare</a>
+                      </button>
+                      <button>
+                        <a href="booking.html">Book</a>
+                      </button>
+                    </div>
+                  </div>
+              </div>
+            </div>
+            <div class="button">
+                <button class="prev">&#60;<i class="fa-solid fa-arrow-left"></i></button>
+                <button class="next">&#62;<i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+      
+          </div>
+    </div>
+    <script src="venues-slider.js"></script>
+    <div>
+        <div class="form" id="venue">
+          <form id="myForm">
+            <div>
+              <label for="venuename">
+                <span>Choose a venue:</span>
+                <select id="venuename" name="venuename">
+                  <option value="">--Please choose an option--</option>
+                  <option value="Central Plaza">Central Plaza</option>
+                  <option value="Pacific Towers Hotel">Pacific Towers Hotel</option>
+                  <option value="Sky Center Complex">Sky Center Complex</option>
+                  <option value="Sea View Tavern">Sea View Tavern</option>
+                  <option value="Ashby Castle">Ashby Castle</option>
+                  <option value="Fawlty Towers">Fawlty Towers</option>
+                  <option value="Hilltop Mansion">Hilltop Mansion</option>
+                  <option value="Haslegrave Hotel">Haslegrave Hotel</option>
+                  <option value="Forest Inn">Forest Inn</option>
+                  <option value="Southwestern Estate">Southwestern Estate</option>
+                </select>
+              </label>
+            </div>
+      
+            <div>
+              <label for="minPrice">
+                <span>Minimum Price:</span>
+                <input type="number" id="minPrice" name="minPrice" min="0" step="0.01">
+              </label>
+            </div>
+            
+            <div>
+              <label for="maxPrice">
+                <span>Maximum Price:</span>
+                <input type="number" id="maxPrice" name="maxPrice" min="0" step="0.01">
+              </label>
+            </div>
+      
+            <div>
+              <label for="license">
+                <span>Choose License:</span>
+                <select id="license" name="license" required>
+                  <option value="licensed">Licensed</option>
+                  <option value="nonLicensed">Non-Licensed</option>
+                </select>
+              </label>
+            </div>
+      
+            <div>
+              <label for="minScore">
+                <span>Minimum Score (0-10):</span>
+                <input type="number" id="minScore" name="minScore" min="0" max="10" step="1">
+              </label>
+            </div>
+      
+            <div>
+              <label for="capacity">
+                <span>Capacity:</span>
+                <input type="number" id="capacity" name="capacity" min="0" step="1">
+              </label>
+            </div>
+      
+            <button type="submit">Submit</button>
+          </form>
+        </div>
+      </div>
+
+      <div id="Output"></div>
+
+      <script>
+       // Wait for the DOM to be fully loaded
+        document.addEventListener("DOMContentLoaded", function() {
+        // Select the form element
+            const form = document.getElementById("myForm");
+
+            // Add event listener for form submission
+            form.addEventListener("submit", function(event) {
+                // Prevent the default form submission
+                event.preventDefault();
+
+                // Get form data
+                const formData = new FormData(form);
+
+                // Send form data to PHP script using AJAX
+                fetch('venues.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Display the output data
+                    
+                    let len = data.length;
+                      let insertedHtml = "<table><tr><th>id</th><th>name</th><th>capacity</th><th>weekend_price</th><th>weekday_price</th><th>avg_score";
+                      for (let i = 0; i <len; i++) {
+                        let id = data[i].venue_id;
+                        let name = data[i].name;
+                        let capacity = data[i].capacity;
+                        let weekend_price = data[i].weekend_price;
+                        let weekday_price = data[i].weekday_price;
+                        let licensed = data[i].licensed;
+                        let avg_score = data[i].average_score;
+                        insertedHtml += "<tr>" + 
+                          "<td>" + id + "</td>" +
+                          "<td>" + name + "</td>" +
+                          "<td>" + capacity + "</td>" +
+                          "<td>" + weekend_price + "</td>" +
+                          "<td>" + weekday_price + "</td>" +
+                          "<td>" + avg_score + "</td>" +
+                          "</tr>";
+                    }
+
+                    insertedHtml += "</table>";
+                    document.getElementById('Output').innerHTML = insertedHtml;
+                })
+
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            });
+        });
+
+      </script>
+      
+
+</body>
+</html>

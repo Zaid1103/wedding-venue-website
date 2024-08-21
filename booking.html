@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="general.css">
+    <link rel="stylesheet" href="navbar.css">
+    <link rel="stylesheet" href="compare-page.css">
+    <link rel="stylesheet" href="venues-form.css">
+    <link rel="stylesheet" href="home-page.css">
+    <script defer src="hpanimations.js"></script>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        h3 {
+            text-align: center;
+        }
+
+        /* New style to hide elements */
+        .hidden {
+            display: none;
+        }
+    </style>
+    <title>Elegance weddings</title>
+</head>
+<body>
+    <header>
+        <div class="logo">Elegance weddings</div>
+        <input type="checkbox" id="nav_check" hidden>
+        <nav>
+            <ul>
+                <li>
+                    <a href="wedding.php">Home</a>
+                </li>
+                <li>
+                    <a href="venues.html">Our Venues</a>
+                </li>
+                <li>
+                    <a href="catering.html">Catering</a>
+                </li>
+                <li>
+                    <a href="compare.html">Compare</a>
+                </li>
+                <li>
+                    <a href="booking.html">Booking</a>
+                </li>
+            </ul>
+        </nav>
+        <label for="nav_check" class="hamburger">
+            <div></div>
+            <div></div>
+            <div></div>
+        </label>
+    </header>
+
+    <h1>Welcome to our booking page</h1>
+
+    <div>
+        <div class="form" id="venue">
+            <form id="myForm">
+
+                <div>
+                    <label for="venuename">
+                        <span>Choose venue to book:</span>
+                        <select id="venuename" name="venuename" required>
+                            <option value="">--Please choose an option--</option>
+                            <option value="Central Plaza">Central Plaza</option>
+                            <option value="Pacific Towers Hotel">Pacific Towers Hotel</option>
+                            <option value="Sky Center Complex">Sky Center Complex</option>
+                            <option value="Sea View Tavern">Sea View Tavern</option>
+                            <option value="Ashby Castle">Ashby Castle</option>
+                            <option value="Fawlty Towers">Fawlty Towers</option>
+                            <option value="Hilltop Mansion">Hilltop Mansion</option>
+                            <option value="Haslegrave Hotel">Haslegrave Hotel</option>
+                            <option value="Forest Inn">Forest Inn</option>
+                            <option value="Southwestern Estate">Southwestern Estate</option>
+                        </select>
+                    </label>
+
+                    <div>
+                        <label for="capacity">
+                          <span>Capacity:</span>
+                          <input type="number" id="capacity" name="capacity" min="0" step="1">
+                        </label>
+                    </div>
+
+                    <div>
+                        <label for="bookingDate">
+                            <span>Select a date:</span>
+                            <input type="date" id="bookingDate" name="bookingDate" required>
+                        </label>
+                    </div>
+
+                </div>
+
+                <button type="submit">Options</button>
+
+            </form>
+        </div>
+    </div>
+
+    <div id="Output"></div>
+
+    <div id="cateringGradeForm" class="hidden">
+        <div class="form">
+            <form>
+                <div>
+                    <label for="cateringGradeDropdown">
+                        <span>Choose catering grade:</span>
+                        <select id="cateringGradeDropdown" name="cateringGrade">
+                            <!-- Options will be populated dynamically by JavaScript -->
+                        </select>
+                    </label>
+                </div>
+                <button type="button" id="bookButton">Book</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Function to populate catering grade dropdown
+        function populateCateringGradeOptions(data) {
+            const cateringGradeDropdown = document.getElementById("cateringGradeDropdown");
+
+            // Clear existing options
+            cateringGradeDropdown.innerHTML = "";
+
+            // Extract unique catering grades from data
+            const cateringGrades = [...new Set(data.map(item => item.catering_grade))];
+
+            // Create and append options to dropdown
+            cateringGrades.forEach(grade => {
+                const option = document.createElement("option");
+                option.value = grade;
+                option.textContent = grade;
+                cateringGradeDropdown.appendChild(option);
+            });
+        }
+
+        // Wait for the DOM to be fully loaded
+        document.addEventListener("DOMContentLoaded", function () {
+            // Select the form element
+            const form = document.getElementById("myForm");
+
+            // Add event listener for form submission
+            form.addEventListener("submit", function (event) {
+                // Prevent the default form submission
+                event.preventDefault();
+
+                // Get form data
+                const formData = new FormData(form);
+
+                // Send form data to PHP script using AJAX
+                fetch('booking.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        if (data.length === 0) {
+                            // Handle empty response
+                            console.log('No data found');
+                            document.getElementById('Output').innerHTML = "<h3>Not available, please adjust capacity or change date</h3>";
+                            document.getElementById('cateringGradeForm').classList.add('hidden');
+                            return;
+                        }
+
+                        // Populate table
+                        let len = data.length;
+                        let insertedHtml = "<table><tr><th>user_guests</th><th>venue_name</th><th>capacity</th><th>weekend_price</th><th>weekday_price</th><th>catering_grade</th><th>catering_costpp</th><th>total_weekend_cost</th><th>total_weekday_cost</th></tr>";
+                        for (let i = 0; i < len; i++) {
+                            let user_capacity = data[i].user_capacity;
+                            let name = data[i].venue_name;
+                            let capacity = data[i].capacity;
+                            let weekend_price = data[i].weekend_price;
+                            let weekday_price = data[i].weekday_price;
+                            let grade = data[i].catering_grade;
+                            let catering_cost = data[i].catering_cost;
+                            let weekend_cost = data[i].total_weekend_cost;
+                            let weekday_cost = data[i].total_weekday_cost;
+                            insertedHtml += "<tr>" +
+                                "<td>" + user_capacity + "</td>" +
+                                "<td>" + name + "</td>" +
+                                "<td>" + capacity + "</td>" +
+                                "<td>" + weekend_price + "</td>" +
+                                "<td>" + weekday_price + "</td>" +
+                                "<td>" + grade + "</td>" +
+                                "<td>" + catering_cost + "</td>" +
+                                "<td>" + weekend_cost + "</td>" +
+                                "<td>" + weekday_cost + "</td>" +
+                                "</tr>";
+                        }
+                        insertedHtml += "</table>";
+                        document.getElementById('Output').innerHTML = insertedHtml;
+
+                        // Populate catering grade dropdown
+                        populateCateringGradeOptions(data);
+
+                        // Show catering grade form
+                        document.getElementById('cateringGradeForm').classList.remove('hidden');
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+
+            });
+
+            // Add event listener for book button
+            document.getElementById('bookButton').addEventListener('click', function () {
+                // Show popup
+                alert('Successfully booked!');
+            });
+
+            // Add event listener for booking date input
+            const bookingDateInput = document.getElementById('bookingDate');
+            bookingDateInput.addEventListener('change', function () {
+                const selectedDate = new Date(bookingDateInput.value);
+                const currentDate = new Date();
+                if (selectedDate < currentDate) {
+                    alert('Please select a date in the future.');
+                    bookingDateInput.value = ''; // Clear the input field
+                }
+            });
+        });
+    </script>
+</body>
+</html>

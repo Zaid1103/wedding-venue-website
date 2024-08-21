@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="general.css">
+    <link rel="stylesheet" href="navbar.css">
+    <link rel="stylesheet" href="catering.css">
+    <link rel="stylesheet" href="venues-form.css">
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            }
+
+            th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+            }
+
+            th {
+            background-color: #f2f2f2;
+            }
+
+            tr:hover {
+            background-color: #f5f5f5;
+        }
+         
+        h3 {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+    <script defer src="hpanimations.js"></script>
+    <title>Elegance weddings</title>
+</head>
+<body>
+    <header>
+        <div class="logo">Elegance weddings</div>
+        <input type="checkbox" id="nav_check" hidden>
+        <nav>
+            <ul>
+                <li>
+                    <a href="wedding.php">Home</a>
+                </li>
+                <li>
+                    <a href="venues.html">Our Venues</a>
+                </li>
+                <li>
+                    <a href="catering.html">Catering</a>
+                </li>
+                <li>
+                    <a href="compare.html">Compare</a>
+                </li>
+                <li>
+                    <a href="booking.html">Booking</a>
+                </li>
+            </ul>
+        </nav>
+        <label for="nav_check" class="hamburger">
+            <div></div>
+            <div></div>
+            <div></div>
+        </label>
+        </header>
+        <div>
+
+    <main>
+        <h1>Explore our range of catering grades</h1>
+        <div class="hidden" id="c1">
+            <div class="box">
+                <div class="desc">
+                    <p>
+                        1 - Classic Elegance - Reflecting a simple yet tasteful culinary experience, perfect for couples seeking a budget-friendly option without compromising quality.
+                    </p>
+                </div>
+                <div>
+                    <img src="grade1.jpg">
+                </div>
+            </div>
+        </div>
+        <div class="hidden" id="c2">
+            <div class="box">
+                <div class="desc">
+                    <p>
+                        2 - Chic Celebration - Offering a step up from basic catering with a touch of sophistication, ideal for couples who want quality cuisine without breaking the bank.
+                    </p>
+                </div>
+                <div>
+                    <img src="grade2.jpg">
+                </div>
+            </div>
+        </div>
+        <div class="hidden" id="c3">
+            <div class="box">
+                <div class="desc">
+                    <p>
+                        3 - Premier Reception - Providing a diverse menu selection and elevated presentation, catering to couples who desire a higher level of culinary experience for their guests.
+                    </p>
+                </div>
+                <div>
+                    <img src="grade3.jpg">
+                </div>
+            </div>
+        </div>
+        <div class="hidden" id="c4">
+            <div class="box">
+                <div class="desc">
+                    <p>
+                        4 - Luxury Banquet - Exuding opulence and refinement, this grade offers premium ingredients, exquisite presentation, and impeccable service for couples aiming to impress
+                         with fine dining at their wedding.
+                    </p>
+                </div>
+                <div>
+                    <img src="grade4 (1).jpg">
+                </div>
+            </div>
+        </div>
+        <div class="hidden" id="c5">
+            <div class="box">
+                <div class="desc">
+                    <p>
+                        5 - Grand Gala - Representing the pinnacle of culinary excellence and extravagance, perfect for couples seeking an unforgettable gastronomic journey and a truly lavish wedding experience.
+                    </p>
+                </div>
+                <div>
+                    <img src="grade5 (1).jpg">
+                </div>
+            </div>
+        </div>
+
+        <div class="hidden">
+            <div class="form" id="venue">
+              <form id="myForm">
+                
+                <div>
+                  <label for="cateringgrade">
+                    <span>Choose a catering grade:</span>
+                    <select id="cateringgrade" name="cateringgrade">
+                      <option value="">--Please choose an option--</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                    </select>
+                  </label>
+                </div>
+
+                <div>
+                    <label for="venuename">
+                      <span>Choose a venue:</span>
+                      <select id="venuename" name="venuename">
+                        <option value="">--Please choose an option--</option>
+                        <option value="Central Plaza">Central Plaza</option>
+                        <option value="Pacific Towers Hotel">Pacific Towers Hotel</option>
+                        <option value="Sky Center Complex">Sky Center Complex</option>
+                        <option value="Sea View Tavern">Sea View Tavern</option>
+                        <option value="Ashby Castle">Ashby Castle</option>
+                        <option value="Fawlty Towers">Fawlty Towers</option>
+                        <option value="Hilltop Mansion">Hilltop Mansion</option>
+                        <option value="Haslegrave Hotel">Haslegrave Hotel</option>
+                        <option value="Forest Inn">Forest Inn</option>
+                        <option value="Southwestern Estate">Southwestern Estate</option>
+                      </select>
+                    </label>
+                  </div>
+          
+                <div>
+                  <label for="minPrice">
+                    <span>Minimum Price:</span>
+                    <input type="number" id="minPrice" name="minPrice" min="0" step="0.01">
+                  </label>
+                </div>
+                
+                <div>
+                  <label for="maxPrice">
+                    <span>Maximum Price:</span>
+                    <input type="number" id="maxPrice" name="maxPrice" min="0" step="0.01">
+                  </label>
+                </div>
+                <button type="submit">Submit</button>
+              </form>
+            </div>
+          </div>
+          <div id="Output"></div>
+
+          <script>
+            // Wait for the DOM to be fully loaded
+            document.addEventListener("DOMContentLoaded", function() {
+            // Select the form element
+                const form = document.getElementById("myForm");
+
+                // Add event listener for form submission
+                form.addEventListener("submit", function(event) {
+                    // Prevent the default form submission
+                    event.preventDefault();
+
+                    // Get form data
+                    const formData = new FormData(form);
+
+                    // Send form data to PHP script using AJAX
+                    fetch('catering.php', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        if (data.length === 0) {
+                            // Handle empty response
+                            console.log('No data found');
+                            document.getElementById('Output').innerHTML = "<h3>Not available, please adjust filters</h3>";
+                            return;
+                        }
+                        let len = data.length;
+                        let insertedHtml = "<table><tr><th>catering-grade</th><th>venue</th><th>cost pp</th><th>avg_score</th></tr>";
+                        for (let i = 0; i < len; i++) {
+                            let grade = data[i].grade;
+                            let name = data[i].venue_name;
+                            let cost = data[i].cost;
+                            let score = data[i].average_review_score
+                            insertedHtml += "<tr>" +
+                            "<td>" + grade + "</td>" +
+                            "<td>" + name + "</td>" +
+                            "<td>" + cost + "</td>" +
+                            "<td>" + score + "</td>" +
+                            "</tr>";
+                        }
+                        insertedHtml += "</table>";
+                        document.getElementById('Output').innerHTML = insertedHtml;
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+
+                });
+            });
+          </script>
+    </main>
+</body>
+</html>
